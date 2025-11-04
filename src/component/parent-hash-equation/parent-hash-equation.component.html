@@ -1,0 +1,32 @@
+@if (parentHash()) {
+  {{ parentHash() }}
+  <math>
+    <mrow>
+      <!-- fenced expression grouped in one mrow -->
+      <mo>(</mo>
+      <mrow>
+        <!-- fenced content grouped in one mrow -->
+        <mn>{{ parentHash() }}</mn>
+        <mo>=</mo>
+        @for (
+          item of firstThreeItems();
+          track $index;
+          let last = $last;
+          let i = $index
+        ) {
+          <mi>{{ item }}</mi>
+          <mo>&times;</mo>
+          <msup
+            ><mn>1024</mn><mn>{{ i }}</mn></msup
+          >
+          @if (!last) {
+            <mo>+</mo>
+          }
+        }
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </math>
+} @else {
+  (No parent)
+}

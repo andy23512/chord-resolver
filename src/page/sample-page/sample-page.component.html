@@ -1,0 +1,91 @@
+@for (item of parsedResult(); track item.serialOutput) {
+  <article class="font-mono">
+    <header>
+      <h4>### {{ item.serialOutput }}</h4>
+    </header>
+    <br />
+    <div>
+      <ul>
+        <li>
+          <table
+            class="table-auto border-collapse border border-gray-300 border-spacing-2 p-1"
+          >
+            <tbody>
+              <tr>
+                <td class="border border-gray-300 p-2">Hex</td>
+                <td class="border border-gray-300 p-2" colspan="13">
+                  {{ item.input.hexString }}
+                </td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Bin</td>
+                <td class="border border-gray-300 p-2" colspan="13">
+                  {{ item.input.hexString | binary }}
+                </td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Bin Chunks</td>
+                @for (
+                  chunk of item.input.hexString
+                    | binary
+                    | chordInputBinaryChunk;
+                  track $index
+                ) {
+                  <td class="border border-gray-300 p-2">
+                    {{ chunk }}
+                  </td>
+                }
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Number List</td>
+                @for (
+                  chunk of item.input.hexString
+                    | binary
+                    | chordInputBinaryChunk;
+                  track $index;
+                  let first = $first
+                ) {
+                  <td class="border border-gray-300 p-2">
+                    @if (!first) {
+                      {{ chunk | decimal }}
+                    }
+                  </td>
+                }
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">
+                  Reversed Number List (Chord Backup Format)
+                </td>
+                <td class="border border-gray-300 p-2"></td>
+                @for (
+                  num of item.input.numberList;
+                  track $index;
+                  let first = $first
+                ) {
+                  <td class="border border-gray-300 p-2">
+                    {{ num }}
+                  </td>
+                }
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Hash</td>
+                <td class="border border-gray-300 p-2" colspan="13">
+                  {{ item.input.hash }}
+                </td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Parent Hash</td>
+                <td class="border border-gray-300 p-2" colspan="13">
+                  <app-parent-hash-equation
+                    [numberList]="item.input.numberList"
+                  ></app-parent-hash-equation>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+    </div>
+    <br />
+  </article>
+}
