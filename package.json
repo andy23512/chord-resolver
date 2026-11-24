@@ -86,6 +86,9 @@
     "**/glob/minimatch": "^11.0.1",
     "**/ignore-walk/minimatch": "^11.0.1",
     "**/ts-checker-rspack-plugin/minimatch": "^11.0.1",
-    "**/nx/axios": "^1.21.1"
+    "**/nx/axios": "^1.21.1",
+    "**/nx/follow-redirects": "^1.16.3",
+    "**/nx/smol-toml": "^1.9.1",
+    "**/nx/brace-expansion": "^5.1.0"
   }
 }
